@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#222" media="(prefers-color-scheme: dark)"><meta name="generator" content="Hexo 6.3.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"cjtzxz.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":true,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="参考文档：适用于 Windows Server 和 Windows 的密钥管理服务 (KMS) 客户端激活和产品密钥 | Microsoft Learn 若要使用 KMS，需要有一个在本地网络上可用的 KMS 主机。 使用 KMS 主机激活的计算机需要具有特定的产品密钥。 此密钥有时称为 KMS 客户端密钥，但其正式名称为 Microsoft 通用批量许可证密钥 (GVLK)。 默认情况下，运行">
+<meta property="og:type" content="article">
+<meta property="og:title" content="密钥管理服务 (KMS) 客户端激活和产品密钥">
+<meta property="og:url" content="https://cjtzxz.github.io/2024/01/05/%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1-KMS-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%BF%80%E6%B4%BB%E5%92%8C%E4%BA%A7%E5%93%81%E5%AF%86%E9%92%A5/index.html">
+<meta property="og:site_name" content="CJTZXZ的博客">
+<meta property="og:description" content="参考文档：适用于 Windows Server 和 Windows 的密钥管理服务 (KMS) 客户端激活和产品密钥 | Microsoft Learn 若要使用 KMS，需要有一个在本地网络上可用的 KMS 主机。 使用 KMS 主机激活的计算机需要具有特定的产品密钥。 此密钥有时称为 KMS 客户端密钥，但其正式名称为 Microsoft 通用批量许可证密钥 (GVLK)。 默认情况下，运行">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-01-05T03:20:33.000Z">
+<meta property="article:modified_time" content="2024-01-08T02:55:28.078Z">
+<meta property="article:author" content="CJTZXZ">
+<meta property="article:tag" content="激活">
+<meta property="article:tag" content="Windows">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://cjtzxz.github.io/2024/01/05/%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1-KMS-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%BF%80%E6%B4%BB%E5%92%8C%E4%BA%A7%E5%93%81%E5%AF%86%E9%92%A5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://cjtzxz.github.io/2024/01/05/%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1-KMS-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%BF%80%E6%B4%BB%E5%92%8C%E4%BA%A7%E5%93%81%E5%AF%86%E9%92%A5/","path":"2024/01/05/密钥管理服务-KMS-客户端激活和产品密钥/","title":"密钥管理服务 (KMS) 客户端激活和产品密钥"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>密钥管理服务 (KMS) 客户端激活和产品密钥 | CJTZXZ的博客</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+<link rel="alternate" href="/atom.xml" title="CJTZXZ的博客" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">CJTZXZ的博客</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">CJTZXZ的个人博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%AE%89%E8%A3%85%E4%BA%A7%E5%93%81%E5%AF%86%E9%92%A5"><span class="nav-number">1.</span> <span class="nav-text">安装产品密钥</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E9%80%9A%E7%94%A8%E6%89%B9%E9%87%8F%E8%AE%B8%E5%8F%AF%E8%AF%81%E5%AF%86%E9%92%A5-GVLK"><span class="nav-number">2.</span> <span class="nav-text">通用批量许可证密钥 (GVLK)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Server%EF%BC%88LTSC-%E7%89%88%E6%9C%AC%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">Windows Server（LTSC 版本）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-Server%EF%BC%88%E5%8D%8A%E5%B9%B4%E9%A2%91%E9%81%93%E7%89%88%E6%9C%AC%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">Windows Server（半年频道版本）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-11-%E5%92%8C-Windows-10%EF%BC%88%E5%8D%8A%E5%B9%B4%E9%A2%91%E9%81%93%E7%89%88%E6%9C%AC%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">Windows 11 和 Windows 10（半年频道版本）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Windows-10%EF%BC%88LTSC-LTSB-%E7%89%88%E6%9C%AC%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">Windows 10（LTSC&#x2F;LTSB 版本）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A9%E6%9C%9F%E7%89%88%E6%9C%AC%E7%9A%84-Windows-Server"><span class="nav-number">2.5.</span> <span class="nav-text">早期版本的 Windows Server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%97%A9%E6%9C%9F%E7%89%88%E6%9C%AC%E7%9A%84-Windows"><span class="nav-number">2.6.</span> <span class="nav-text">早期版本的 Windows</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="CJTZXZ"
+      src="https://upload-bbs.miyoushe.com/upload/2021/02/28/82642572/0e9d3fda9507da9ee8b752f36828f335_908988996817213147.jpg">
+  <p class="site-author-name" itemprop="name">CJTZXZ</p>
+  <div class="site-description" itemprop="description">这个网站是CJTZXZ用来写博客的</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/CJTZXZ" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;CJTZXZ" rel="noopener me" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="sidebar-inner sidebar-blogroll">
+      <div class="links-of-blogroll animated">
+        <div class="links-of-blogroll-title"><i class="fa fa-globe fa-fw"></i>
+          链接
+        </div>
+        <ul class="links-of-blogroll-list">
+            <li class="links-of-blogroll-item">
+              <a href="https://github.com/" title="https:&#x2F;&#x2F;github.com&#x2F;" rel="noopener" target="_blank">Github</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.google.com/" title="https:&#x2F;&#x2F;www.google.com&#x2F;" rel="noopener" target="_blank">Google</a>
+            </li>
+            <li class="links-of-blogroll-item">
+              <a href="https://www.bing.com/" title="https:&#x2F;&#x2F;www.bing.com&#x2F;" rel="noopener" target="_blank">Bing</a>
+            </li>
+        </ul>
+      </div>
+    </div>
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cjtzxz.github.io/2024/01/05/%E5%AF%86%E9%92%A5%E7%AE%A1%E7%90%86%E6%9C%8D%E5%8A%A1-KMS-%E5%AE%A2%E6%88%B7%E7%AB%AF%E6%BF%80%E6%B4%BB%E5%92%8C%E4%BA%A7%E5%93%81%E5%AF%86%E9%92%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://upload-bbs.miyoushe.com/upload/2021/02/28/82642572/0e9d3fda9507da9ee8b752f36828f335_908988996817213147.jpg">
+      <meta itemprop="name" content="CJTZXZ">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="CJTZXZ的博客">
+      <meta itemprop="description" content="这个网站是CJTZXZ用来写博客的">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="密钥管理服务 (KMS) 客户端激活和产品密钥 | CJTZXZ的博客">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          密钥管理服务 (KMS) 客户端激活和产品密钥
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-01-05 11:20:33" itemprop="dateCreated datePublished" datetime="2024-01-05T11:20:33+08:00">2024-01-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2024-01-08 10:55:28" itemprop="dateModified" datetime="2024-01-08T10:55:28+08:00">2024-01-08</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><p>参考文档：<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows-server/get-started/kms-client-activation-keys">适用于 Windows Server 和 Windows 的密钥管理服务 (KMS) 客户端激活和产品密钥 | Microsoft Learn</a></p>
+<p>若要使用 KMS，需要有一个在本地网络上可用的 KMS 主机。 使用 KMS 主机激活的计算机需要具有特定的产品密钥。 此密钥有时称为 KMS 客户端密钥，但其正式名称为 Microsoft 通用批量许可证密钥 (GVLK)。 默认情况下，运行 Windows Server 和 Windows 客户端批量许可版本的计算机是无需额外配置的 KMS 客户端，因为相关 GVLK 已经存在。</p>
+<span id="more"></span>
+
+<p>但是，在某些情况下，需要将 GVLK 添加到要针对 KMS 主机激活的计算机，例如：</p>
+<ul>
+<li>转换计算机使其不使用多次激活密钥 (MAK)</li>
+<li>将 Windows 的零售许可证转换为 KMS 客户端</li>
+<li>如果计算机以前是 KMS 主机</li>
+</ul>
+<p><strong>重要</strong></p>
+<p>若要使用此处列出的密钥（它们是 GVLK），你必须首先在本地网络中拥有可用的 KMS 主机。 如果还没有 KMS 主机，请参阅如何<a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/windows-server/get-started/kms-create-host">创建 KMS 主机</a>以了解详细信息。</p>
+<p>如果你想要在没有可用的 KMS 主机的情况下在批量激活场景之外激活 Windows（例如，你尝试激活 Windows 客户端的零售版），则这些密钥将不起作用。 需要使用另一种激活 Windows 的方法，如使用 MAK 或购买零售许可证。 获取帮助以<a target="_blank" rel="noopener" href="https://support.microsoft.com/help/10749/windows-product-key">查找 Windows 产品密钥</a>并了解 <a target="_blank" rel="noopener" href="https://support.microsoft.com/help/15087/windows-genuine">Windows 的正版版本</a>。</p>
+<h1 id="安装产品密钥"><a href="#安装产品密钥" class="headerlink" title="安装产品密钥"></a>安装产品密钥</h1><p>如果要将计算机从 KMS 主机、MAK 或零售版 Windows 转换为 KMS 客户端，则从以下列表中安装适用的产品密钥 (GVLK)。 若要安装客户端产品密钥，请在客户端上打开一个管理命令提示符，并运行以下命令，然后按 <code>Enter</code>：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slmgr /ipk &lt;product key&gt;</span><br></pre></td></tr></table></figure>
+
+<p>例如，若要安装 Windows Server 2022 Datacenter 版的产品密钥，请运行以下命令，然后按 <code>Enter</code>：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">slmgr /ipk WX4NM-KYWYW-QJJR4-XV3QB-<span class="number">6</span>VM33</span><br></pre></td></tr></table></figure>
+
+<h1 id="通用批量许可证密钥-GVLK"><a href="#通用批量许可证密钥-GVLK" class="headerlink" title="通用批量许可证密钥 (GVLK)"></a>通用批量许可证密钥 (GVLK)</h1><p>在下表中，可找到 Windows 每个版本的 GVLK。 LTSC 是长期服务渠道，而 LTSB 是 Long-Term Servicing Branch 。</p>
+<h2 id="Windows-Server（LTSC-版本）"><a href="#Windows-Server（LTSC-版本）" class="headerlink" title="Windows Server（LTSC 版本）"></a>Windows Server（LTSC 版本）</h2><p>Windows Server 2022</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows Server 2022 Datacenter</td>
+<td align="left">WX4NM-KYWYW-QJJR4-XV3QB-6VM33</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2022 Datacenter Azure Edition</td>
+<td align="left">NTBV8-9K7Q8-V27C6-M2BTV-KHMXV</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2022 Standard</td>
+<td align="left">VDYBN-27WPP-V4HQT-9VMD4-VMK7H</td>
+</tr>
+</tbody></table>
+<p>Windows Server 2019</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows Server 2019 Datacenter</td>
+<td align="left">WMDGN-G9PQG-XVVXX-R3X43-63DFG</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2019 Standard</td>
+<td align="left">N69G4-B89J2-4G8F4-WWYCC-J464C</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2019 Essentials</td>
+<td align="left">WVDHN-86M7X-466P6-VHXV7-YY726</td>
+</tr>
+</tbody></table>
+<p>Windows Server 2016</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows Server 2016 Datacenter</td>
+<td align="left">CB7KF-BWN84-R7R2Y-793K2-8XDDG</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2016 Standard</td>
+<td align="left">WC2BQ-8NRM3-FDDYY-2BFGV-KHKQY</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2016 Essentials</td>
+<td align="left">JCKRF-N37P4-C2D82-9YXRT-4M63B</td>
+</tr>
+</tbody></table>
+<h2 id="Windows-Server（半年频道版本）"><a href="#Windows-Server（半年频道版本）" class="headerlink" title="Windows Server（半年频道版本）"></a>Windows Server（半年频道版本）</h2><p>Windows Server，版本 20H2、2004、1909、1903 和 1809</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows Server Datacenter</td>
+<td align="left">6NMRW-2C8FM-D24W7-TQWMY-CWH2D</td>
+</tr>
+<tr>
+<td align="left">Windows Server Standard</td>
+<td align="left">N2KJX-J94YW-TQVFB-DG9YT-724CC</td>
+</tr>
+</tbody></table>
+<p><strong>重要</strong></p>
+<p>Windows Server 版本 20H2 已于 2022 年 8 月 9 日终止服务，不再接收安全更新。 这包括停用 Windows Server 半年频道 (SAC)，不再提供未来版本。</p>
+<p>使用 Windows Server SAC 的客户应迁移到 <a target="_blank" rel="noopener" href="https://learn.microsoft.com/zh-cn/azure-stack/hci/">Azure Stack HCI</a>。 或者，客户可使用 Windows Server 的长期服务渠道。</p>
+<h2 id="Windows-11-和-Windows-10（半年频道版本）"><a href="#Windows-11-和-Windows-10（半年频道版本）" class="headerlink" title="Windows 11 和 Windows 10（半年频道版本）"></a>Windows 11 和 Windows 10（半年频道版本）</h2><p>有关受支持的版本和服务终止日期的信息，请参阅 <a target="_blank" rel="noopener" href="https://support.microsoft.com/help/13853/windows-lifecycle-fact-sheet">Windows 生命周期情况说明书</a>。</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows 11 专业版 Windows 10 专业版</td>
+<td align="left">W269N-WFGWX-YVC9B-4J6C9-T83GX</td>
+</tr>
+<tr>
+<td align="left">Windows 11 专业版 N Windows 10 专业版 N</td>
+<td align="left">MH37W-N47XK-V7XM9-C7227-GCQG9</td>
+</tr>
+<tr>
+<td align="left">Windows 11 专业工作站版 Windows 10 专业工作站版</td>
+<td align="left">NRG8B-VKK3Q-CXVCJ-9G2XF-6Q84J</td>
+</tr>
+<tr>
+<td align="left">Windows 11 专业工作站版 N Windows 10 专业工作站版 N</td>
+<td align="left">9FNHH-K3HBT-3W4TD-6383H-6XYWF</td>
+</tr>
+<tr>
+<td align="left">Windows 11 专业教育版 Windows 10 专业教育版</td>
+<td align="left">6TP4R-GNPTD-KYYHQ-7B7DP-J447Y</td>
+</tr>
+<tr>
+<td align="left">Windows 11 专业教育版 N Windows 10 专业教育版 N</td>
+<td align="left">YVWGF-BXNMC-HTQYQ-CPQ99-66QFC</td>
+</tr>
+<tr>
+<td align="left">Windows 11 教育版 Windows 10 教育版</td>
+<td align="left">NW6C2-QMPVW-D7KKK-3GKT6-VCFB2</td>
+</tr>
+<tr>
+<td align="left">Windows 11 教育版 N Windows 10 教育版 N</td>
+<td align="left">2WH4N-8QGBV-H22JP-CT43Q-MDWWJ</td>
+</tr>
+<tr>
+<td align="left">Windows 11 企业版 Windows 10 企业版</td>
+<td align="left">NPPR9-FWDCX-D2C8J-H872K-2YT43</td>
+</tr>
+<tr>
+<td align="left">Windows 11 企业版 N Windows 10 企业版 N</td>
+<td align="left">DPH2V-TTNVB-4X9Q3-TJR4H-KHJW4</td>
+</tr>
+<tr>
+<td align="left">Windows 11 企业版 G Windows 10 企业版 G</td>
+<td align="left">YYVX9-NTFWV-6MDM3-9PT4T-4M68B</td>
+</tr>
+<tr>
+<td align="left">Windows 11 企业版 G N Windows 10 企业版 G N</td>
+<td align="left">44RPN-FTY23-9VTTB-MP9BX-T84FV</td>
+</tr>
+</tbody></table>
+<h2 id="Windows-10（LTSC-LTSB-版本）"><a href="#Windows-10（LTSC-LTSB-版本）" class="headerlink" title="Windows 10（LTSC&#x2F;LTSB 版本）"></a>Windows 10（LTSC&#x2F;LTSB 版本）</h2><p>Windows 10 LTSC 2021 和 2019</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows 10 企业版 LTSC 2021 Windows 10 企业版 LTSC 2019</td>
+<td align="left">M7XTQ-FN8P6-TTKYV-9D4CC-J462D</td>
+</tr>
+<tr>
+<td align="left">Windows 10 企业版 N LTSC 2021 Windows 10 企业版 N LTSC 2019</td>
+<td align="left">92NFX-8DJQP-P6BBQ-THF9C-7CG2H</td>
+</tr>
+</tbody></table>
+<p>Windows 10 LTSB 2016</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows 10 企业版 LTSB 2016</td>
+<td align="left">DCPHK-NFMTC-H88MJ-PFHPY-QJ4BJ</td>
+</tr>
+<tr>
+<td align="left">Windows 10 企业版 N LTSB 2016</td>
+<td align="left">QFFDN-GRT3P-VKWWX-X7T3R-8B639</td>
+</tr>
+</tbody></table>
+<p>Windows 10 LTSB 2015</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows 10 企业版 2015 LTSB</td>
+<td align="left">WNMTR-4C88C-JK8YV-HQ7T2-76DF9</td>
+</tr>
+<tr>
+<td align="left">Windows 10 企业版 2015 LTSB N</td>
+<td align="left">2F77B-TNFGY-69QQF-B8YKP-D69TJ</td>
+</tr>
+</tbody></table>
+<h2 id="早期版本的-Windows-Server"><a href="#早期版本的-Windows-Server" class="headerlink" title="早期版本的 Windows Server"></a>早期版本的 Windows Server</h2><p>Windows Server 版本 1803</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows Server Datacenter</td>
+<td align="left">2HXDN-KRXHB-GPYC7-YCKFJ-7FVDG</td>
+</tr>
+<tr>
+<td align="left">Windows Server Standard</td>
+<td align="left">PTXN8-JFHJM-4WC78-MPCBR-9W4KR</td>
+</tr>
+</tbody></table>
+<p>Windows Server 版本 1709</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows Server Datacenter</td>
+<td align="left">6Y6KB-N82V8-D8CQV-23MJW-BWTG6</td>
+</tr>
+<tr>
+<td align="left">Windows Server Standard</td>
+<td align="left">DPCNP-XQFKJ-BJF7R-FRC8D-GF6G4</td>
+</tr>
+</tbody></table>
+<p>Windows Server 2012 R2</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows Server 2012 R2 Standard</td>
+<td align="left">D2N9P-3P6X9-2R39C-7RTCD-MDVJX</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2012 R2 Datacenter</td>
+<td align="left">W3GGN-FT8W3-Y4M27-J84CP-Q3VJ9</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2012 R2 Essentials</td>
+<td align="left">KNC87-3J2TX-XB4WP-VCPJV-M4FWM</td>
+</tr>
+</tbody></table>
+<p>Windows Server 2012</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows Server 2012</td>
+<td align="left">BN3D2-R7TKB-3YPBD-8DRP2-27GG4</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2012 N</td>
+<td align="left">8N2M2-HWPGY-7PGT9-HGDD8-GVGGY</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2012 单语言版</td>
+<td align="left">2WN2H-YGCQR-KFX6K-CD6TF-84YXQ</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2012 特定国家&#x2F;地区版</td>
+<td align="left">4K36P-JN4VD-GDC6V-KDT89-DYFKP</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2012 Standard</td>
+<td align="left">XC9B7-NBPP2-83J2H-RHMBY-92BT4</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2012 MultiPoint 标准版</td>
+<td align="left">HM7DN-YVMH3-46JC3-XYTG7-CYQJJ</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2012 MultiPoint 高级版</td>
+<td align="left">XNH6W-2V9GX-RGJ4K-Y8X6F-QGJ2G</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2012 Datacenter</td>
+<td align="left">48HP8-DN98B-MYWDG-T2DCC-8W83P</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2012 Essentials</td>
+<td align="left">HTDQM-NBMMG-KGYDT-2DTKT-J2MPV</td>
+</tr>
+</tbody></table>
+<p>Windows Server 2008 R2</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows Server 2008 R2 Web 版</td>
+<td align="left">6TPJF-RBVHG-WBW2R-86QPH-6RTM4</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2008 R2 HPC 版</td>
+<td align="left">TT8MH-CG224-D3D7Q-498W2-9QCTX</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2008 R2 标准版</td>
+<td align="left">YC6KT-GKW9T-YTKYR-T4X34-R7VHC</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2008 R2 企业版</td>
+<td align="left">489J6-VHDMP-X63PK-3K798-CPX3Y</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2008 R2 Datacenter</td>
+<td align="left">74YFP-3QFB3-KQT8W-PMXWJ-7M648</td>
+</tr>
+<tr>
+<td align="left">面向基于 Itanium 系统的 Windows Server 2008 R2</td>
+<td align="left">GT63C-RJFQ3-4GMB6-BRFB9-CB83V</td>
+</tr>
+</tbody></table>
+<p>Windows 2008 Server</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows Web Server 2008</td>
+<td align="left">WYR28-R7TFJ-3X2YQ-YCY4H-M249D</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2008 标准版</td>
+<td align="left">TM24T-X9RMF-VWXK6-X8JC9-BFGM2</td>
+</tr>
+<tr>
+<td align="left">不带 Hyper-V 的 Windows Server 2008 标准版</td>
+<td align="left">W7VD6-7JFBR-RX26B-YKQ3Y-6FFFJ</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2008 企业版</td>
+<td align="left">YQGMW-MPWTJ-34KDK-48M3W-X4Q6V</td>
+</tr>
+<tr>
+<td align="left">不带 Hyper-V 的 Windows Server 2008 企业版</td>
+<td align="left">39BXF-X8Q23-P2WWT-38T2F-G3FPG</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2008 HPC</td>
+<td align="left">RCTX3-KWVHP-BR6TB-RB6DM-6X7HP</td>
+</tr>
+<tr>
+<td align="left">Windows Server 2008 Datacenter</td>
+<td align="left">7M67G-PC374-GR742-YH8V4-TCBY3</td>
+</tr>
+<tr>
+<td align="left">不带 Hyper-V 的 Windows Server 2008 数据中心版</td>
+<td align="left">22XQ2-VRXRG-P8D42-K34TD-G3QQC</td>
+</tr>
+<tr>
+<td align="left">面向基于 Itanium 系统的 Windows Server 2008</td>
+<td align="left">4DWFP-JF3DJ-B7DTH-78FJB-PDRHK</td>
+</tr>
+</tbody></table>
+<h2 id="早期版本的-Windows"><a href="#早期版本的-Windows" class="headerlink" title="早期版本的 Windows"></a>早期版本的 Windows</h2><p>Windows 8.1</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows 8.1 专业版</td>
+<td align="left">GCRJD-8NW9H-F2CDX-CCM8D-9D6T9</td>
+</tr>
+<tr>
+<td align="left">Windows 8.1 专业版 N</td>
+<td align="left">HMCNV-VVBFX-7HMBH-CTY9B-B4FXY</td>
+</tr>
+<tr>
+<td align="left">Windows 8.1 企业版</td>
+<td align="left">MHF9N-XY6XB-WVXMC-BTDCT-MKKG7</td>
+</tr>
+<tr>
+<td align="left">Windows 8.1 企业版 N</td>
+<td align="left">TT4HM-HN7YT-62K67-RGRQJ-JFFXW</td>
+</tr>
+</tbody></table>
+<p>Windows 8</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows 8 专业版</td>
+<td align="left">NG4HW-VH26C-733KW-K6F98-J8CK4</td>
+</tr>
+<tr>
+<td align="left">Windows 8 专业版 N</td>
+<td align="left">XCVCF-2NXM9-723PB-MHCB7-2RYQQ</td>
+</tr>
+<tr>
+<td align="left">Windows 8 企业版</td>
+<td align="left">32JNW-9KQ84-P47T8-D8GGY-CWCK7</td>
+</tr>
+<tr>
+<td align="left">Windows 8 企业版 N</td>
+<td align="left">JMNMF-RHW7P-DMY6X-RF3DR-X2BQT</td>
+</tr>
+</tbody></table>
+<p>Windows 7</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows 7 专业版</td>
+<td align="left">FJ82H-XT6CR-J8D7P-XQJJ2-GPDD4</td>
+</tr>
+<tr>
+<td align="left">Windows 7 专业版 N</td>
+<td align="left">MRPKT-YTG23-K7D7T-X2JMM-QY7MG</td>
+</tr>
+<tr>
+<td align="left">Windows 7 专业版 E</td>
+<td align="left">W82YF-2Q76Y-63HXB-FGJG9-GF7QX</td>
+</tr>
+<tr>
+<td align="left">Windows 7 企业版</td>
+<td align="left">33PXH-7Y6KF-2VJC9-XBBR8-HVTHH</td>
+</tr>
+<tr>
+<td align="left">Windows 7 企业版 N</td>
+<td align="left">YDRBP-3D83W-TY26F-D46B2-XCKRJ</td>
+</tr>
+<tr>
+<td align="left">Windows 7 企业版 E</td>
+<td align="left">C29WB-22CC8-VJ326-GHFJW-H9DH4</td>
+</tr>
+</tbody></table>
+<p>Windows Vista</p>
+<table>
+<thead>
+<tr>
+<th align="left">操作系统版本</th>
+<th align="left">KMS 客户端产品密钥</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">Windows Vista 商用版</td>
+<td align="left">YFKBB-PQJJV-G996G-VWGXY-2V3X8</td>
+</tr>
+<tr>
+<td align="left">Windows Vista 商用版 N</td>
+<td align="left">HMBQG-8H2RH-C77VX-27R82-VMQBT</td>
+</tr>
+<tr>
+<td align="left">Windows Vista 企业版</td>
+<td align="left">VKK3X-68KWM-X2YGT-QR4M6-4BWMV</td>
+</tr>
+<tr>
+<td align="left">Windows Vista 企业版 N</td>
+<td align="left">VTC42-BM838-43QHV-84HX6-XJXKV</td>
+</tr>
+</tbody></table>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%BF%80%E6%B4%BB/" rel="tag"># 激活</a>
+              <a href="/tags/Windows/" rel="tag"># Windows</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/05/17/%E5%B8%B8%E7%94%A8%E8%BD%AF%E4%BB%B6%E7%BD%91%E5%9D%80/" rel="prev" title="常用软件网址">
+                  <i class="fa fa-angle-left"></i> 常用软件网址
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 2023 – 
+    <span itemprop="copyrightYear">2024</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">CJTZXZ</span>
+  </div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/pisces/" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/CJTZXZ" class="github-corner" title="在 GitHub 上关注我" aria-label="在 GitHub 上关注我" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
